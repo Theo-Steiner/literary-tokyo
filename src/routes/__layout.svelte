@@ -22,7 +22,7 @@
 		width: 100vw;
 		width: 100dvw;
 		display: grid;
-		grid-template-rows: auto;
+		grid-template-rows: 100%;
 		grid-template-columns: repeat(3, 1fr);
 	}
 	/* breakpoint */

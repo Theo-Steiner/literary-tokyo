@@ -51,7 +51,7 @@
 
 	label {
 		margin: 0 2rem;
-		padding-bottom: 0.5rem;
+		padding-bottom: 0.2rem;
 		display: block;
 	}
 </style>

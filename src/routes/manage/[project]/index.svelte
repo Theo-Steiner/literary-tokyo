@@ -15,32 +15,53 @@
 	import mapPosition from '$lib/utils/mapPosition';
 	import supabase from '$lib/utils/supabase';
 
-	import { onMount } from 'svelte';
-	import Works from '$lib/components/cms/Works.svelte';
-	import Locations from '$lib/components/cms/Locations.svelte';
-	import Visualizations from '$lib/components/cms/Visualizations.svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import WorksManager from '$lib/components/cms/WorksManager.svelte';
+	import LocationsManager from '$lib/components/cms/LocationsManager.svelte';
+	import VisualizationsManager from '$lib/components/cms/VisualizationsManager.svelte';
+	import type { Works } from '$lib/types/derived-types';
 	export let projectTitle: string;
+	let projectId: number;
 	let step = 'works';
+	let works: Works = [];
 
-	onMount(() => {
+	async function loadProjectData() {
+		const { data, error } = await supabase
+			.from('projects')
+			//TODO: once , query visualizations (*) once ready
+			.select('id, works (*), locations (*)')
+			.eq('title', projectTitle);
+		if (error) {
+			console.error(error);
+			return;
+		}
+		console.log(data);
+		[{ id: projectId, works }] = data;
+	}
+
+	onMount(async () => {
 		$mapPosition = { rows: '1/-1', cols: '2/-1' };
+		await loadProjectData();
+	});
+	onDestroy(() => {
+		$mapPosition = { rows: '1/-1', cols: '1/-1' };
 	});
 </script>
 
-<section class="sidebar">
+<aside>
 	{#if step === 'works'}
-		<Works {projectTitle} />
+		<WorksManager {projectTitle} {projectId} />
 	{:else if step === 'locations'}
-		<Locations />
+		<LocationsManager />
 	{:else if step === 'visualizations'}
-		<Visualizations />
+		<VisualizationsManager />
 	{:else}
 		<h2>4. Publish</h2>
 		<p>
 			Request a review for this project. After a succesful review, it will be published to the web
 		</p>
 	{/if}
-</section>
+</aside>
 
 <style>
 </style>

@@ -27,7 +27,7 @@
 </script>
 
 <div class="foreground-overlay">
-	<Form {error} {handleSubmit}>
+	<Form {error} {handleSubmit} formDescription="Create a new project">
 		<FormInput
 			pattern="[A-Za-z0-9]+([ ]?[A-Za-z0-9]+)*"
 			labelText="A title for your project"
