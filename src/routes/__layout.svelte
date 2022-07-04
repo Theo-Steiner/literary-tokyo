@@ -6,11 +6,12 @@
 	import '../app.css';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import Map from '$lib/components/Map.svelte';
+	import mapPosition from '$lib/utils/mapPosition';
 </script>
 
 <main>
 	<!-- <Navigation /> -->
-	<Map />
+	<Map gridRow={$mapPosition.rows} gridColumn={$mapPosition.cols} />
 	<slot />
 </main>
 
@@ -22,6 +23,7 @@
 		width: 100dvw;
 		display: grid;
 		grid-template-rows: auto;
-		grid-template-columns: 15rem auto;
+		grid-template-columns: repeat(3, 1fr);
 	}
+	/* breakpoint */
 </style>

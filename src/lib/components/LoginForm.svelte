@@ -2,6 +2,7 @@
 	import supabase from '$lib/utils/supabase';
 	import userStore from '$lib/utils/userStore';
 	import type { ApiError } from '@supabase/supabase-js';
+	import Form from './Form.svelte';
 
 	let mode = 'login';
 	let error: ApiError | null;
@@ -28,10 +29,7 @@
 </script>
 
 <div class="foreground-overlay">
-	<form on:submit|preventDefault={handleSubmit}>
-		{#if error}
-			<p>{error.message}</p>
-		{/if}
+	<Form {error} {handleSubmit}>
 		<label>
 			<input type="email" autocomplete="username" name="userEmail" placeholder="email" />
 			Your email address
@@ -50,13 +48,5 @@
 			<p>or</p>
 			<button type="button" on:click={() => (mode = 'sign-up')}>sign up</button>
 		{/if}
-	</form>
+	</Form>
 </div>
-
-<style>
-	form {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-</style>

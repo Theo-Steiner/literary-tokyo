@@ -10,6 +10,9 @@
 
 html {
 	font-size: 62.5%;
+	--primary-color: rgb(107, 70, 193);
+	--error-color: #f44336;
+	--light-gray: #d3d3d3;
 	--background-gradient: radial-gradient(
 		100% 100% at 67% 0%,
 		rgba(192, 86, 33, 0.7) 0%,
@@ -31,8 +34,112 @@ body {
 	background-image: var(--background-gradient);
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	z-index: 1;
+	justify-content: space-evenly;
 	align-items: center;
 	grid-column: 1 / -1;
 	grid-row: 1 / -1;
+}
+
+.foreground {
+	z-index: 2;
+}
+
+.sidebar {
+	grid-column: 1 / 2;
+	grid-row: 1 / -1;
+}
+
+button {
+	background-image: var(--background-gradient);
+	color: white;
+	cursor: pointer;
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	padding: 0.8rem 1.2rem;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.card {
+	color: black;
+	border-radius: 8px;
+	background-color: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(5px);
+	margin: 2rem;
+	padding: 2rem;
+	width: 20rem;
+	height: 15rem;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 500px;
+	max-height: 80%;
+	overflow: scroll;
+	margin: 0 auto;
+	padding: 2rem;
+	border: none;
+	border-radius: 8px;
+	background-color: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+select,
+input:not([type='checkbox']) {
+	-webkit-appearance: none;
+	/* Input font-sizes smaller than 16px are force zoomed in on iOS */
+	font-size: 1.6rem;
+	line-height: 1;
+	background-color: rgba(255, 255, 255, 0.6);
+	/* Inputs don't auto grow inside block containers, so here I manually set the width */
+	width: calc(100% - 4rem);
+	color: var(--primary-color);
+	margin: 1rem 2rem;
+	padding: 1.2rem 4rem 1.2rem 2rem;
+	border-radius: 8px;
+	border: 1px solid var(--light-gray);
+	transition: color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+input::placeholder,
+select:invalid {
+	color: var(--light-gray);
+}
+
+input:focus {
+	/* implement alternate focus style */
+	outline: none;
+	border: 1px solid var(--primary-color);
+}
+
+.touched:not(:focus-within) input:invalid + .error-message,
+.touched:not(:focus-within) select:invalid + .error-message {
+	color: var(--error-color);
+	visibility: visible;
+	padding-bottom: 1.5rem;
+	opacity: 1;
+}
+
+.touched:not(:focus-within) input:invalid,
+.touched:not(:focus-within) select:invalid {
+	border: solid 1px var(--error-color);
+	color: var(--error-color);
+}
+
+.error-message {
+	color: var(--primary-color);
+	visibility: hidden;
+	transition: all 0.3s ease-in-out;
+	transition-delay: 0.1s;
+	opacity: 0;
+	margin: 0 2rem;
+	padding-bottom: 0.2rem;
 }

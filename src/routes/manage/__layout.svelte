@@ -12,10 +12,12 @@
 	});
 </script>
 
-{#if !$userStore}
+{#if $userStore === undefined}
+	<div class="foreground-overlay">loading...</div>
+{:else if !$userStore}
 	<LoginForm />
 {:else}
-	<button on:click={signOut}>logout</button>
+	<button class="foreground" on:click={signOut}>logout</button>
 	<slot />
 {/if}
 

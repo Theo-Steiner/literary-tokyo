@@ -5,7 +5,7 @@
 	export let work;
 </script>
 
-<a href={url}>
+<a class="card" href={url}>
 	<header>
 		<p>{work.title} - {work.author}</p>
 		<h3>{title}</h3>
@@ -25,12 +25,5 @@
 	a {
 		display: block;
 		text-decoration: none;
-		color: black;
-		border-radius: 6px;
-		background-color: rgba(255, 255, 255, 0.6);
-		margin: 2rem;
-		padding: 2rem;
-		width: 20rem;
-		height: 15rem;
 	}
 </style>

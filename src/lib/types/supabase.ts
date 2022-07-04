@@ -24,6 +24,7 @@ export interface paths {
           author?: parameters["rowFilter.projects.author"];
           /** Has the project been checked by me? */
           is_published?: parameters["rowFilter.projects.is_published"];
+          user_id?: parameters["rowFilter.projects.user_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -82,6 +83,7 @@ export interface paths {
           author?: parameters["rowFilter.projects.author"];
           /** Has the project been checked by me? */
           is_published?: parameters["rowFilter.projects.is_published"];
+          user_id?: parameters["rowFilter.projects.user_id"];
         };
         header: {
           /** Preference */
@@ -104,10 +106,98 @@ export interface paths {
           author?: parameters["rowFilter.projects.author"];
           /** Has the project been checked by me? */
           is_published?: parameters["rowFilter.projects.is_published"];
+          user_id?: parameters["rowFilter.projects.user_id"];
         };
         body: {
           /** projects */
           projects?: definitions["projects"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/published_projects": {
+    get: {
+      parameters: {
+        query: {
+          project_id?: parameters["rowFilter.published_projects.project_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["published_projects"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** published_projects */
+          published_projects?: definitions["published_projects"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          project_id?: parameters["rowFilter.published_projects.project_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          project_id?: parameters["rowFilter.published_projects.project_id"];
+        };
+        body: {
+          /** published_projects */
+          published_projects?: definitions["published_projects"];
         };
         header: {
           /** Preference */
@@ -150,6 +240,7 @@ export interface paths {
           is_projected?: parameters["rowFilter.locations.is_projected"];
           /** Which project was this location first introduced with? */
           part_of?: parameters["rowFilter.locations.part_of"];
+          user_id?: parameters["rowFilter.locations.user_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -226,6 +317,7 @@ export interface paths {
           is_projected?: parameters["rowFilter.locations.is_projected"];
           /** Which project was this location first introduced with? */
           part_of?: parameters["rowFilter.locations.part_of"];
+          user_id?: parameters["rowFilter.locations.user_id"];
         };
         header: {
           /** Preference */
@@ -266,6 +358,7 @@ export interface paths {
           is_projected?: parameters["rowFilter.locations.is_projected"];
           /** Which project was this location first introduced with? */
           part_of?: parameters["rowFilter.locations.part_of"];
+          user_id?: parameters["rowFilter.locations.user_id"];
         };
         body: {
           /** locations */
@@ -425,6 +518,18 @@ export interface definitions {
      * @default false
      */
     is_published: boolean;
+    /** Format: uuid */
+    user_id: string;
+  };
+  /** @description A table with all published projects. To publish a project, it has to be added here. */
+  published_projects: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
+     */
+    project_id: number;
   };
   /** @description Locations are data points sourced from novels */
   locations: {
@@ -506,6 +611,8 @@ export interface definitions {
      * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
      */
     part_of?: number;
+    /** Format: uuid */
+    user_id: string;
   };
   /** @description works from where data points are extracted to be visualized on a map of Tokyo. */
   works: {
@@ -597,6 +704,12 @@ export interface parameters {
    * @description Has the project been checked by me?
    */
   "rowFilter.projects.is_published": string;
+  /** Format: uuid */
+  "rowFilter.projects.user_id": string;
+  /** @description published_projects */
+  "body.published_projects": definitions["published_projects"];
+  /** Format: bigint */
+  "rowFilter.published_projects.project_id": string;
   /** @description locations */
   "body.locations": definitions["locations"];
   /** Format: bigint */
@@ -662,6 +775,8 @@ export interface parameters {
    * @description Which project was this location first introduced with?
    */
   "rowFilter.locations.part_of": string;
+  /** Format: uuid */
+  "rowFilter.locations.user_id": string;
   /** @description works */
   "body.works": definitions["works"];
   /**

@@ -4,8 +4,8 @@
 	import type mapbox from 'mapbox-gl';
 	import { points } from '$lib/data/places.json';
 
-	export let gridRow = '1/2';
-	export let gridColumn = '1/3';
+	export let gridRow: string;
+	export let gridColumn: string;
 	let map: mapbox.Map;
 	async function resize(_row: string, _col: string) {
 		if (map) {
@@ -18,6 +18,7 @@
 	onMount(() => map.setCenter([139.6503, 35.6762]));
 </script>
 
+<!-- TODO: refactor to not use grid-row/ column but long-side and short-side and add media query -->
 <div style:grid-row={gridRow} style:grid-column={gridColumn}>
 	<Map
 		accessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
@@ -39,7 +40,6 @@
 </div>
 
 <style>
-	div {
-		z-index: -1;
+	@media (min-width: 768px) {
 	}
 </style>
