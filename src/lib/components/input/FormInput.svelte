@@ -21,14 +21,14 @@
 	export let required = false;
 	export let isValid = false;
 
-	let touched = false;
+	export let touched = false;
 
 	if (inputType === 'checkbox') {
 		isValid = true;
 	}
 </script>
 
-<div on:focusout={() => (touched = true)} class:touched>
+<div class="custom-input" on:focusout={() => (touched = true)} class:touched>
 	{#if inputType === 'checkbox'}
 		<CheckboxInput {labelText} {value} bind:checked {name} />
 	{:else}

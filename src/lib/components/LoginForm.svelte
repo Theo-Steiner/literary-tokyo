@@ -30,11 +30,11 @@
 
 <div class="foreground-overlay">
 	<Form {error} {handleSubmit}>
-		<label>
+		<label class="custom-input">
 			<input type="email" autocomplete="username" name="userEmail" placeholder="email" />
 			Your email address
 		</label>
-		<label>
+		<label class="custom-input">
 			<input
 				type="password"
 				autocomplete={mode === 'login' ? 'current-password' : 'new-password'}

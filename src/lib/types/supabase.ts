@@ -22,8 +22,6 @@ export interface paths {
           title?: parameters["rowFilter.projects.title"];
           /** Author of a project */
           author?: parameters["rowFilter.projects.author"];
-          /** Has the project been checked by me? */
-          is_published?: parameters["rowFilter.projects.is_published"];
           user_id?: parameters["rowFilter.projects.user_id"];
           /** Filtering Columns */
           select?: parameters["select"];
@@ -81,8 +79,6 @@ export interface paths {
           title?: parameters["rowFilter.projects.title"];
           /** Author of a project */
           author?: parameters["rowFilter.projects.author"];
-          /** Has the project been checked by me? */
-          is_published?: parameters["rowFilter.projects.is_published"];
           user_id?: parameters["rowFilter.projects.user_id"];
         };
         header: {
@@ -104,8 +100,6 @@ export interface paths {
           title?: parameters["rowFilter.projects.title"];
           /** Author of a project */
           author?: parameters["rowFilter.projects.author"];
-          /** Has the project been checked by me? */
-          is_published?: parameters["rowFilter.projects.is_published"];
           user_id?: parameters["rowFilter.projects.user_id"];
         };
         body: {
@@ -388,6 +382,8 @@ export interface paths {
           author?: parameters["rowFilter.works.author"];
           /** What project was this novel first introduced with? */
           part_of?: parameters["rowFilter.works.part_of"];
+          year?: parameters["rowFilter.works.year"];
+          user_id?: parameters["rowFilter.works.user_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -447,6 +443,8 @@ export interface paths {
           author?: parameters["rowFilter.works.author"];
           /** What project was this novel first introduced with? */
           part_of?: parameters["rowFilter.works.part_of"];
+          year?: parameters["rowFilter.works.year"];
+          user_id?: parameters["rowFilter.works.user_id"];
         };
         header: {
           /** Preference */
@@ -470,6 +468,8 @@ export interface paths {
           author?: parameters["rowFilter.works.author"];
           /** What project was this novel first introduced with? */
           part_of?: parameters["rowFilter.works.part_of"];
+          year?: parameters["rowFilter.works.year"];
+          user_id?: parameters["rowFilter.works.user_id"];
         };
         body: {
           /** works */
@@ -512,12 +512,6 @@ export interface definitions {
      * @description Author of a project
      */
     author: string;
-    /**
-     * Format: boolean
-     * @description Has the project been checked by me?
-     * @default false
-     */
-    is_published: boolean;
     /** Format: uuid */
     user_id: string;
   };
@@ -630,10 +624,10 @@ export interface definitions {
      */
     created_at?: string;
     /**
-     * Format: ARRAY
+     * Format: text
      * @description How to cite this novel?
      */
-    citation?: unknown[];
+    citation?: string;
     /**
      * Format: text
      * @description Who's the author of this novel?
@@ -647,6 +641,10 @@ export interface definitions {
      * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
      */
     part_of: number;
+    /** Format: text */
+    year: string;
+    /** Format: uuid */
+    user_id: string;
   };
 }
 
@@ -699,11 +697,6 @@ export interface parameters {
    * @description Author of a project
    */
   "rowFilter.projects.author": string;
-  /**
-   * Format: boolean
-   * @description Has the project been checked by me?
-   */
-  "rowFilter.projects.is_published": string;
   /** Format: uuid */
   "rowFilter.projects.user_id": string;
   /** @description published_projects */
@@ -787,7 +780,7 @@ export interface parameters {
   /** Format: timestamp with time zone */
   "rowFilter.works.created_at": string;
   /**
-   * Format: ARRAY
+   * Format: text
    * @description How to cite this novel?
    */
   "rowFilter.works.citation": string;
@@ -801,6 +794,10 @@ export interface parameters {
    * @description What project was this novel first introduced with?
    */
   "rowFilter.works.part_of": string;
+  /** Format: text */
+  "rowFilter.works.year": string;
+  /** Format: uuid */
+  "rowFilter.works.user_id": string;
 }
 
 export interface operations {}

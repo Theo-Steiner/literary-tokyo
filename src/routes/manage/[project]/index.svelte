@@ -19,11 +19,13 @@
 	import WorksManager from '$lib/components/cms/WorksManager.svelte';
 	import LocationsManager from '$lib/components/cms/LocationsManager.svelte';
 	import VisualizationsManager from '$lib/components/cms/VisualizationsManager.svelte';
-	import type { Works } from '$lib/types/derived-types';
+	import type { Works, Locations } from '$lib/types/derived-types';
 	export let projectTitle: string;
 	let projectId: number;
-	let step = 'works';
+	let currentStep = 0;
+	const state = ['Manage Works', 'Add Locations', 'Create Visualizations', 'Publish'];
 	let works: Works = [];
+	let locations: Locations = [];
 
 	async function loadProjectData() {
 		const { data, error } = await supabase
@@ -35,8 +37,8 @@
 			console.error(error);
 			return;
 		}
-		console.log(data);
-		[{ id: projectId, works }] = data;
+		[{ id: projectId, works, locations }] = data;
+		console.log(projectId, works, locations);
 	}
 
 	onMount(async () => {
@@ -49,11 +51,15 @@
 </script>
 
 <aside>
-	{#if step === 'works'}
-		<WorksManager {projectTitle} {projectId} />
-	{:else if step === 'locations'}
-		<LocationsManager />
-	{:else if step === 'visualizations'}
+	<header>
+		<p>-- {projectTitle} --</p>
+		<h2>{currentStep + 1}. {state[currentStep]}</h2>
+	</header>
+	{#if currentStep == 0}
+		<WorksManager {projectId} bind:works />
+	{:else if currentStep == 1}
+		<LocationsManager {projectId} {works} bind:locations />
+	{:else if currentStep == 2}
 		<VisualizationsManager />
 	{:else}
 		<h2>4. Publish</h2>
@@ -61,7 +67,29 @@
 			Request a review for this project. After a succesful review, it will be published to the web
 		</p>
 	{/if}
+	<footer>
+		<button disabled={currentStep == 0} on:click={() => currentStep--}>previous</button>
+		<button disabled={currentStep == 3} on:click={() => currentStep++}>next</button>
+	</footer>
 </aside>
 
 <style>
+	header > p {
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	header {
+		border-bottom: 1px solid var(--primary-color);
+		box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+		padding: 2rem;
+		color: white;
+		text-align: center;
+	}
+	footer {
+		border-top: 1px solid var(--primary-color);
+		padding: 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 </style>

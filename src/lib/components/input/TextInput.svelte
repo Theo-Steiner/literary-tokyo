@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { tick } from 'svelte';
+
 	export let value: string;
 	export let name: string;
 	export let type: 'text' | 'email' | 'tel' | 'date' | 'number';
@@ -16,7 +18,8 @@
 	 * @param _value is needed for the reactivity to trigger on value change
 	 * @param node is the HTMLInputElement, whose validity will be checked
 	 */
-	const getInputValidity = (_value: string, node: HTMLInputElement): boolean => {
+	const getInputValidity = async (_value: string, node: HTMLInputElement) => {
+		await tick();
 		if (node?.validity.valueMissing) {
 			errorMessage = 'This field is required.';
 		} else if (node?.validity.typeMismatch) {
@@ -25,9 +28,9 @@
 		} else {
 			errorMessage = 'Please enter a valid value.';
 		}
-		return node?.validity.valid;
+		isValid = node?.checkValidity();
 	};
-	$: isValid = getInputValidity(value, inputNode);
+	$: getInputValidity(value, inputNode);
 
 	// handle input event manually, as binding to values doesn't work with a generic {type}
 	const handleInput = (e: Event) => {

@@ -27,7 +27,8 @@
 	{name}
 	id={name}
 >
-	<option value="" disabled selected>{required ? 'Required' : 'Selection'}</option>
+	<option value="" disabled={required} selected>{required ? 'Required' : 'Nothing selected'}</option
+	>
 	{#each options as option}
 		<option value={option}>{option}</option>
 	{/each}

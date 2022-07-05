@@ -4,9 +4,10 @@
 	export let handleSubmit: (e: SubmitEvent & { currentTarget: HTMLFormElement }) => void;
 	export let error: PostgrestError | ApiError | null = null;
 	export let formDescription = '';
+	export let maxHeight: string | undefined = undefined;
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form style:max-height={maxHeight ? maxHeight : 'none'} on:submit|preventDefault={handleSubmit}>
 	{#if error}
 		<p class="error">{error.message}</p>
 		{#if 'hint' in error && error.hint}

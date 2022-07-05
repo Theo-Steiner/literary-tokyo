@@ -10,6 +10,7 @@
 
 html {
 	font-size: 62.5%;
+	scroll-behavior: smooth;
 	--primary-color: rgb(107, 70, 193);
 	--error-color: #f44336;
 	--light-gray: #d3d3d3;
@@ -49,11 +50,20 @@ aside {
 	grid-column: 1 / 2;
 	grid-row: 1 / -1;
 	background-image: var(--background-gradient);
-	padding: 2rem;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	z-index: 1;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+aside > section {
+	height: 100%;
+	overflow-y: scroll;
+	padding: 2rem;
+}
+
+aside > section > h3 {
+	color: var(--primary-color);
 }
 
 button {
@@ -66,6 +76,34 @@ button {
 	border: none;
 	border-radius: 8px;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+
+table {
+	width: 100%;
+	border-radius: 8px;
+	background-color: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	margin: 2rem 0;
+}
+
+th {
+	text-align: left;
+	padding: 0.8rem 1.2rem;
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	color: var(--primary-color);
+}
+
+td {
+	padding: 0.8rem 1.2rem;
+	font-size: 1.4rem;
 }
 
 .card {
@@ -85,7 +123,6 @@ form {
 	align-items: center;
 	width: 100%;
 	max-width: 500px;
-	max-height: 80%;
 	overflow-y: scroll;
 	margin: 0 auto;
 	padding: 2rem;
@@ -95,10 +132,11 @@ form {
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	margin: 2rem 0;
 }
 
-select,
-input:not([type='checkbox']) {
+.custom-input select,
+.custom-input input:not([type='checkbox']) {
 	-webkit-appearance: none;
 	/* Input font-sizes smaller than 16px are force zoomed in on iOS */
 	font-size: 1.6rem;
@@ -111,18 +149,25 @@ input:not([type='checkbox']) {
 	padding: 1.2rem 4rem 1.2rem 2rem;
 	border-radius: 8px;
 	border: 1px solid var(--light-gray);
+	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
 	transition: color 0.3s ease-in-out, border 0.3s ease-in-out;
 }
 
-input::placeholder,
-select:invalid {
+.custom-input input::placeholder,
+.custom-input select:invalid {
 	color: var(--light-gray);
 }
 
-input:focus {
+.custom-input input:focus {
 	/* implement alternate focus style */
 	outline: none;
 	border: 1px solid var(--primary-color);
+}
+
+.custom-input input[type='checkbox'] {
+	margin: 0 2rem;
+	min-width: 2.8rem;
+	min-height: 2.8rem;
 }
 
 .touched:not(:focus-within) input:invalid + .error-message,
@@ -137,6 +182,17 @@ input:focus {
 .touched:not(:focus-within) select:invalid {
 	border: solid 1px var(--error-color);
 	color: var(--error-color);
+}
+
+.mapboxgl-ctrl-geocoder {
+	background-color: rgba(255, 255, 255, 0.6) !important;
+	min-width: none !important;
+	width: 100% !important;
+}
+
+.mapboxgl-ctrl-geocoder--button {
+	background: none !important;
+	box-shadow: none !important;
 }
 
 .error-message {
