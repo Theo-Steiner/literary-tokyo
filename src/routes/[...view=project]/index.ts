@@ -30,6 +30,7 @@ export const get: RequestHandler = async ({
 		const [{ title, id, created_at, author, user_id, works, locations, visualizations }] = data;
 		return {
 			body: {
+				projectSlug,
 				project: { title, id, created_at, author, user_id },
 				works,
 				locations,

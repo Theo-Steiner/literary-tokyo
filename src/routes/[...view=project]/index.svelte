@@ -4,12 +4,10 @@
 	import type { Project, Works, Locations, Visualizations } from '$lib/types/derived-types';
 	export let project: Project;
 
-	let currentStep = 0;
-	const state = ['Manage Works', 'Add Locations', 'Create Visualizations', 'Publish'];
-
 	export let works: Works = [];
 	export let locations: Locations = [];
 	export let visualizations: Visualizations = [];
+	export let projectSlug: string;
 </script>
 
 <header>
@@ -23,6 +21,10 @@
 <footer>
 	<a href="/">literary.tokyo</a>
 </footer>
+
+{#each visualizations as visualization}
+	<a style="display: none;" href="/{projectSlug}/{visualization.id}">{visualization.name}</a>
+{/each}
 
 <style>
 	header > p {
