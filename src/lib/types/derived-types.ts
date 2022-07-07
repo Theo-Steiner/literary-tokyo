@@ -6,3 +6,5 @@ export type Work = definitions['works'];
 export type Works = Work[];
 export type Location = definitions['locations'];
 export type Locations = Location[];
+export type Visualization = definitions['visualizations'];
+export type Visualizations = Visualizations[];

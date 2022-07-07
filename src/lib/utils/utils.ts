@@ -34,3 +34,21 @@ function restoreOriginalCase(lowerCaseString: string) {
 	}
 	return originalCase;
 }
+
+export function convertToPointString(pointsArray: number[][]) {
+	let pointstring = '';
+	for (const point of pointsArray) {
+		pointstring += `${point[0]},${point[1]};`;
+	}
+	return pointstring;
+}
+
+export function convertToPointsArray(pointString: string) {
+	const pointsArray = pointString.split(';');
+	return pointsArray.reduce((prev: number[][], point) => {
+		if (point) {
+			const coordinates = point.split(',');
+			return [...prev, [parseFloat(coordinates[0]), parseFloat(coordinates[1])]];
+		} else return prev;
+	}, []);
+}

@@ -1,38 +1,43 @@
-<script>
+<script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { contextKey } from '@beyonk/svelte-mapbox';
-	const { getMap, getMapbox } = getContext(contextKey);
+	import { convertToPointsArray } from '$lib/utils/utils';
+	const { getMap } = getContext(contextKey);
+	export let name: string;
+	export let color = 'yellow';
+	export let points: string;
+	$: coordinates = convertToPointsArray(points);
 	const map = getMap();
-	const mapbox = getMapbox();
+
+	$: console.log(coordinates);
+	const sourceId = `${name}-line-source`;
+	const lineLayerId = `${name}-line-layer`;
 
 	onMount(() => {
 		map
-			.addSource('my-data', {
+			.addSource(sourceId, {
 				type: 'geojson',
 				data: {
 					type: 'Feature',
 					geometry: {
 						type: 'LineString',
-						coordinates: [
-							[139.74341, 35.653132],
-							[139.63334, 35.43333]
-						]
+						coordinates
 					},
 					properties: {}
 				}
 			})
 			.addLayer({
-				id: 'route',
+				id: lineLayerId,
 				type: 'line',
-				source: 'my-data',
+				source: sourceId,
 				paint: {
-					'line-color': 'yellow',
+					'line-color': color,
 					'line-width': 2
 				}
 			});
 		return () => {
-			map.removeLayer('route');
-			map.removeSource('my-data');
+			map.removeLayer(lineLayerId);
+			map.removeSource(sourceId);
 		};
 	});
 </script>

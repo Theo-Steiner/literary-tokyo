@@ -9,6 +9,7 @@
 	import PlaceFinder from './PlaceFinder.svelte';
 	import { tick } from 'svelte';
 	import displayedPlaces from '$lib/utils/displayedPlaces';
+	import LocationTable from '../display/LocationTable.svelte';
 
 	export let projectId: number;
 	export let locations: Locations;
@@ -23,7 +24,6 @@
 	let longitude = '';
 	let longitudeValidity: boolean;
 	let latitudeValidity: boolean;
-	let filter = '';
 
 	let selectedPlace: {
 		longitude: number;
@@ -55,50 +55,35 @@
 
 	interface NewLocationFormElements extends HTMLFormControlsCollection {
 		source: HTMLInputElement;
-		quote: HTMLInputElement;
-		quote_original: HTMLInputElement;
 		page: HTMLInputElement;
 		name: HTMLInputElement;
 		latitude: HTMLInputElement;
 		longitude: HTMLInputElement;
-		is_precise: HTMLInputElement;
-		is_projected: HTMLInputElement;
 		annotation: HTMLInputElement;
-		date: HTMLInputElement;
 		tags: HTMLInputElement;
 	}
 
 	const handleSubmit = async (e: SubmitEvent & { currentTarget: HTMLFormElement }) => {
 		error = null;
 		const form = e.currentTarget;
-		const {
-			source,
-			quote,
-			quote_original,
-			page,
-			name,
-			longitude,
-			latitude,
-			is_precise,
-			is_projected,
-			annotation,
-			date,
-			tags
-		} = form.elements as NewLocationFormElements;
+		const { source, page, name, longitude, latitude, annotation, tags } =
+			form.elements as NewLocationFormElements;
 		let data;
 		({ data, error } = await supabase.from('locations').insert({
 			source: source.value,
-			quote: quote.value,
-			quote_original: quote_original.value ? quote_original.value : undefined,
-			page: Number(page.value),
+			page: page.value,
 			name: name.value,
 			latitude: Number(latitude.value),
 			longitude: Number(longitude.value),
-			is_precise: is_precise.checked,
-			is_projected: is_projected.checked,
 			annotation: annotation.value ? annotation.value : undefined,
-			date: date.value ? date.value : undefined,
-			tags: tags.value ? tags.value.split(',').forEach((tag) => tag.trim()) : undefined,
+			tags: tags.value
+				? tags.value
+						.toLowerCase()
+						.split(',')
+						.reduce((acc: string[], val) => {
+							return [...acc, val.trim()];
+						}, [])
+				: undefined,
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			user_id: $userStore!.user!.id,
 			part_of: projectId
@@ -110,12 +95,15 @@
 		longitude.value = '';
 		page.value = '';
 		name.value = '';
+		await tick();
 		touched = false;
 		formDescription = "Success! While you're at it, add another location!";
 	};
 </script>
 
 <section>
+	<!-- TODO: ADD CRUD FUNCTIONALITY FOR LOCATIONS -->
+	<LocationTable {works} {locations} />
 	<h3>Project the fictionalized space onto real-life Tokyo!</h3>
 	<Form {formDescription} {error} {handleSubmit}>
 		<FormInput
@@ -125,20 +113,6 @@
 			name="source"
 			required
 			labelText="What work is this setting from?"
-		/>
-		<FormInput
-			{touched}
-			required
-			name="quote"
-			labelText="The quote this location is derived from."
-		/>
-		<FormInput {touched} name="quote_original" labelText="Optional Japanese language quote." />
-		<FormInput
-			{touched}
-			required
-			inputType="number"
-			name="page"
-			labelText="Pagenumber of the quote."
 		/>
 		<PlaceFinder on:place-selection={completeWithSelection} />
 		<FormInput
@@ -167,47 +141,20 @@
 			labelText="Longitude of the location."
 		/>
 		<FormInput
-			inputType="checkbox"
 			{touched}
-			name="is_precise"
-			labelText="Is the location pinpointing somewhere and not fuzzy? 'Shinjuku' is not precise."
-		/>
-		<FormInput
-			inputType="checkbox"
-			{touched}
-			name="is_projected"
-			labelText="Is the location 'projected'? That is not actually visited but dreamed about or longed for."
+			required
+			name="page"
+			labelText="On what pages can one verify this location?"
 		/>
 		<FormInput {touched} name="annotation" labelText="Your annotation to this location." />
-		<FormInput
-			{touched}
-			inputType="date"
-			name="date"
-			labelText="Is the location visited on a specified date?"
-		/>
 		<FormInput
 			{touched}
 			name="tags"
 			labelText="A comma-separated list of one-word tags for this location. The literary map can be filtered by these tags, they could for example specify a character visiting a location."
 		/>
-		<button type="submit">Add work</button>
+		<button type="submit">Add location</button>
 	</Form>
-	<h3>Locations available in our database:</h3>
-	<FormInput
-		inputType="select"
-		bind:value={filter}
-		options={works.map(({ title }) => title)}
-		labelText="Filter by work:"
-	/>
-	<p>Click location to show on the map</p>
-	<table>
-		<tr><th>location</th><th>work</th><th>page</th></tr>
-		{#each locations as location}
-			{#if !filter || location.source === filter}
-				<tr on:click={() => ($displayedPlaces = [location])}
-					><td>{location.name}</td><td>{location.source}</td><td>{location.page}</td></tr
-				>
-			{/if}
-		{/each}
-	</table>
 </section>
+
+<style>
+</style>

@@ -9,7 +9,7 @@
 <section>
 	{#each projects as project}
 		<Card
-			url={`${addRoute.includes('manage') ? '/manage/' : '/'}${generateSlug(project.title)}`}
+			url={`${addRoute.includes('new') ? '/manage/' : '/'}${generateSlug(project.title)}`}
 			title={project.title}
 			work={{ author: 'Murakami Haruki', title: '1Q84' }}
 			author={project.author}

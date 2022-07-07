@@ -1,53 +1,63 @@
-<script>
+<script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { contextKey } from '@beyonk/svelte-mapbox';
 	import concaveman from 'concaveman';
-	const { getMap, getMapbox } = getContext(contextKey);
+	import { convertToPointsArray } from '$lib/utils/utils';
+	export let name: string;
+	export let points: string;
+	export let color = 'white';
+
+	const { getMap } = getContext(contextKey);
 	const map = getMap();
-	const unsorted_coordinates = [
-		[139.2005, 35.9911],
-		[139.63334, 35.43333],
-		[139.7005, 35.6911],
-		[139.74341, 35.653132],
-		[139.4005, 35.3911]
-	];
-	// TODO: 1. make area and line usable in arbitrary cases
-	// TODO: 2. add visualizations to the schema
-	// TODO: 3. add filters etc. to the visualizations
-	// TODO: 4. add 1Q84 data
-	// TODO: 5. create 1Q84 visualizations
-	// TODO: 6. add 1Q84 visualizations to master thesis
-	// TODO: 7. add public routes
-	// TODO: 8. add public routes filters etc.
-	// calculate a concave hull for a set of coordinates
-	const concave_hull = concaveman(unsorted_coordinates);
+	let initialized = false;
+
+	const sourceId = `${name}-area-source`;
+	const areaLayerId = `${name}-area-layer`;
+	const outlineLayerId = `${name}-area-outline-layer`;
+
+	// calculate a concave hull for a set of coordinates if necessary
+	$: polygon = concaveman(convertToPointsArray(points));
+
+	const updatePolygon = (polygon: number[]) => {
+		if (initialized) {
+			map.getSource(sourceId).setData({
+				type: 'Feature',
+				geometry: {
+					type: 'Polygon',
+					coordinates: [polygon]
+				}
+			});
+		}
+	};
+
+	$: updatePolygon(polygon);
 
 	onMount(() => {
 		map
-			.addSource('polygon-data', {
+			.addSource(sourceId, {
 				type: 'geojson',
 				data: {
 					type: 'Feature',
 					geometry: {
 						type: 'Polygon',
-						coordinates: [concave_hull]
+						coordinates: [polygon]
 					}
 				}
 			})
 			.addLayer({
-				id: 'poly',
+				id: areaLayerId,
 				type: 'fill',
-				source: 'polygon-data',
+				source: sourceId,
 				layout: {},
 				paint: {
-					'fill-color': '#0080ff',
-					'fill-opacity': 0.5
+					'fill-color': color,
+					'fill-opacity': 0.3
 				}
 			})
 			.addLayer({
-				id: 'outline',
+				id: outlineLayerId,
 				type: 'line',
-				source: 'polygon-data',
+				source: sourceId,
 				layout: {},
 				paint: {
 					'line-color': '#000',
@@ -55,9 +65,9 @@
 				}
 			});
 		return () => {
-			map.removeLayer('poly');
-			map.removeLayer('outline');
-			map.removeSource('polygon-data');
+			map.removeLayer(areaLayerId);
+			map.removeLayer(outlineLayerId);
+			map.removeSource(sourceId);
 		};
 	});
 </script>

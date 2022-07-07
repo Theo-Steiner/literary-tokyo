@@ -19,26 +19,26 @@
 	import WorksManager from '$lib/components/cms/WorksManager.svelte';
 	import LocationsManager from '$lib/components/cms/LocationsManager.svelte';
 	import VisualizationsManager from '$lib/components/cms/VisualizationsManager.svelte';
-	import type { Works, Locations } from '$lib/types/derived-types';
+	import type { Works, Locations, Visualizations } from '$lib/types/derived-types';
 	export let projectTitle: string;
 	let projectId: number;
 	let currentStep = 0;
 	const state = ['Manage Works', 'Add Locations', 'Create Visualizations', 'Publish'];
 	let works: Works = [];
 	let locations: Locations = [];
+	let visualizations: Visualizations = [];
 
 	async function loadProjectData() {
 		const { data, error } = await supabase
 			.from('projects')
-			//TODO: once , query visualizations (*) once ready
-			.select('id, works (*), locations (*)')
+			.select('id, works (*), locations (*), visualizations (*)')
 			.eq('title', projectTitle);
 		if (error) {
 			console.error(error);
 			return;
 		}
-		[{ id: projectId, works, locations }] = data;
-		console.log(projectId, works, locations);
+		[{ id: projectId, works, locations, visualizations }] = data;
+		console.log(projectId, works, locations, visualizations);
 	}
 
 	onMount(async () => {
@@ -60,12 +60,14 @@
 	{:else if currentStep == 1}
 		<LocationsManager {projectId} {works} bind:locations />
 	{:else if currentStep == 2}
-		<VisualizationsManager />
+		<VisualizationsManager {projectId} {works} {locations} bind:visualizations />
 	{:else}
-		<h2>4. Publish</h2>
-		<p>
-			Request a review for this project. After a succesful review, it will be published to the web
-		</p>
+		<section>
+			<p>
+				Request a review for this project. After a succesful review, it will be published to the web
+			</p>
+			<button>request review</button>
+		</section>
 	{/if}
 	<footer>
 		<button disabled={currentStep == 0} on:click={() => currentStep--}>previous</button>

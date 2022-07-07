@@ -117,6 +117,117 @@ export interface paths {
       };
     };
   };
+  "/visualizations": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.visualizations.id"];
+          created_at?: parameters["rowFilter.visualizations.created_at"];
+          name?: parameters["rowFilter.visualizations.name"];
+          type?: parameters["rowFilter.visualizations.type"];
+          color?: parameters["rowFilter.visualizations.color"];
+          description?: parameters["rowFilter.visualizations.description"];
+          points?: parameters["rowFilter.visualizations.points"];
+          user_id?: parameters["rowFilter.visualizations.user_id"];
+          part_of?: parameters["rowFilter.visualizations.part_of"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["visualizations"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** visualizations */
+          visualizations?: definitions["visualizations"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.visualizations.id"];
+          created_at?: parameters["rowFilter.visualizations.created_at"];
+          name?: parameters["rowFilter.visualizations.name"];
+          type?: parameters["rowFilter.visualizations.type"];
+          color?: parameters["rowFilter.visualizations.color"];
+          description?: parameters["rowFilter.visualizations.description"];
+          points?: parameters["rowFilter.visualizations.points"];
+          user_id?: parameters["rowFilter.visualizations.user_id"];
+          part_of?: parameters["rowFilter.visualizations.part_of"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.visualizations.id"];
+          created_at?: parameters["rowFilter.visualizations.created_at"];
+          name?: parameters["rowFilter.visualizations.name"];
+          type?: parameters["rowFilter.visualizations.type"];
+          color?: parameters["rowFilter.visualizations.color"];
+          description?: parameters["rowFilter.visualizations.description"];
+          points?: parameters["rowFilter.visualizations.points"];
+          user_id?: parameters["rowFilter.visualizations.user_id"];
+          part_of?: parameters["rowFilter.visualizations.part_of"];
+        };
+        body: {
+          /** visualizations */
+          visualizations?: definitions["visualizations"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/published_projects": {
     get: {
       parameters: {
@@ -212,12 +323,6 @@ export interface paths {
           created_at?: parameters["rowFilter.locations.created_at"];
           latitude?: parameters["rowFilter.locations.latitude"];
           longitude?: parameters["rowFilter.locations.longitude"];
-          /** Is the location "fuzzy" or precisely located in the work? */
-          is_precise?: parameters["rowFilter.locations.is_precise"];
-          /** The relevant quote in English */
-          quote?: parameters["rowFilter.locations.quote"];
-          /** The relevant quote in Japanese if available */
-          quote_original?: parameters["rowFilter.locations.quote_original"];
           /** What work is this setting from? */
           source?: parameters["rowFilter.locations.source"];
           /** What page of that source is it on? */
@@ -226,15 +331,10 @@ export interface paths {
           tags?: parameters["rowFilter.locations.tags"];
           /** Comments by the project owner */
           annotation?: parameters["rowFilter.locations.annotation"];
-          /** Is the location visited at a certain date? Used for timeline */
-          date?: parameters["rowFilter.locations.date"];
-          /** Is the location visited at a certain time? Used for timeline */
-          time?: parameters["rowFilter.locations.time"];
-          /** Is the location projected (longed for, dreamed about, remembered)? */
-          is_projected?: parameters["rowFilter.locations.is_projected"];
           /** Which project was this location first introduced with? */
           part_of?: parameters["rowFilter.locations.part_of"];
           user_id?: parameters["rowFilter.locations.user_id"];
+          name?: parameters["rowFilter.locations.name"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -289,12 +389,6 @@ export interface paths {
           created_at?: parameters["rowFilter.locations.created_at"];
           latitude?: parameters["rowFilter.locations.latitude"];
           longitude?: parameters["rowFilter.locations.longitude"];
-          /** Is the location "fuzzy" or precisely located in the work? */
-          is_precise?: parameters["rowFilter.locations.is_precise"];
-          /** The relevant quote in English */
-          quote?: parameters["rowFilter.locations.quote"];
-          /** The relevant quote in Japanese if available */
-          quote_original?: parameters["rowFilter.locations.quote_original"];
           /** What work is this setting from? */
           source?: parameters["rowFilter.locations.source"];
           /** What page of that source is it on? */
@@ -303,15 +397,10 @@ export interface paths {
           tags?: parameters["rowFilter.locations.tags"];
           /** Comments by the project owner */
           annotation?: parameters["rowFilter.locations.annotation"];
-          /** Is the location visited at a certain date? Used for timeline */
-          date?: parameters["rowFilter.locations.date"];
-          /** Is the location visited at a certain time? Used for timeline */
-          time?: parameters["rowFilter.locations.time"];
-          /** Is the location projected (longed for, dreamed about, remembered)? */
-          is_projected?: parameters["rowFilter.locations.is_projected"];
           /** Which project was this location first introduced with? */
           part_of?: parameters["rowFilter.locations.part_of"];
           user_id?: parameters["rowFilter.locations.user_id"];
+          name?: parameters["rowFilter.locations.name"];
         };
         header: {
           /** Preference */
@@ -330,12 +419,6 @@ export interface paths {
           created_at?: parameters["rowFilter.locations.created_at"];
           latitude?: parameters["rowFilter.locations.latitude"];
           longitude?: parameters["rowFilter.locations.longitude"];
-          /** Is the location "fuzzy" or precisely located in the work? */
-          is_precise?: parameters["rowFilter.locations.is_precise"];
-          /** The relevant quote in English */
-          quote?: parameters["rowFilter.locations.quote"];
-          /** The relevant quote in Japanese if available */
-          quote_original?: parameters["rowFilter.locations.quote_original"];
           /** What work is this setting from? */
           source?: parameters["rowFilter.locations.source"];
           /** What page of that source is it on? */
@@ -344,15 +427,10 @@ export interface paths {
           tags?: parameters["rowFilter.locations.tags"];
           /** Comments by the project owner */
           annotation?: parameters["rowFilter.locations.annotation"];
-          /** Is the location visited at a certain date? Used for timeline */
-          date?: parameters["rowFilter.locations.date"];
-          /** Is the location visited at a certain time? Used for timeline */
-          time?: parameters["rowFilter.locations.time"];
-          /** Is the location projected (longed for, dreamed about, remembered)? */
-          is_projected?: parameters["rowFilter.locations.is_projected"];
           /** Which project was this location first introduced with? */
           part_of?: parameters["rowFilter.locations.part_of"];
           user_id?: parameters["rowFilter.locations.user_id"];
+          name?: parameters["rowFilter.locations.name"];
         };
         body: {
           /** locations */
@@ -515,6 +593,38 @@ export interface definitions {
     /** Format: uuid */
     user_id: string;
   };
+  /** @description Visualizations for a novel */
+  visualizations: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: text */
+    name: string;
+    /** Format: text */
+    type: string;
+    /** Format: text */
+    color?: string;
+    /** Format: text */
+    description: string;
+    /** Format: text */
+    points: string;
+    /** Format: uuid */
+    user_id: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
+     */
+    part_of?: number;
+  };
   /** @description A table with all published projects. To publish a project, it has to be added here. */
   published_projects: {
     /**
@@ -543,22 +653,6 @@ export interface definitions {
     /** Format: double precision */
     longitude: number;
     /**
-     * Format: boolean
-     * @description Is the location "fuzzy" or precisely located in the work?
-     * @default true
-     */
-    is_precise?: boolean;
-    /**
-     * Format: text
-     * @description The relevant quote in English
-     */
-    quote: string;
-    /**
-     * Format: text
-     * @description The relevant quote in Japanese if available
-     */
-    quote_original?: string;
-    /**
      * Format: text
      * @description What work is this setting from?
      *
@@ -575,28 +669,12 @@ export interface definitions {
      * Format: ARRAY
      * @description Tags by which locations can be filtered
      */
-    tags?: unknown[];
+    tags?: string[];
     /**
      * Format: text
      * @description Comments by the project owner
      */
     annotation?: string;
-    /**
-     * Format: date
-     * @description Is the location visited at a certain date? Used for timeline
-     */
-    date?: string;
-    /**
-     * Format: time without time zone
-     * @description Is the location visited at a certain time? Used for timeline
-     */
-    time?: string;
-    /**
-     * Format: boolean
-     * @description Is the location projected (longed for, dreamed about, remembered)?
-     * @default false
-     */
-    is_projected?: boolean;
     /**
      * Format: bigint
      * @description Which project was this location first introduced with?
@@ -607,6 +685,8 @@ export interface definitions {
     part_of?: number;
     /** Format: uuid */
     user_id: string;
+    /** Format: text */
+    name: string;
   };
   /** @description works from where data points are extracted to be visualized on a map of Tokyo. */
   works: {
@@ -699,6 +779,26 @@ export interface parameters {
   "rowFilter.projects.author": string;
   /** Format: uuid */
   "rowFilter.projects.user_id": string;
+  /** @description visualizations */
+  "body.visualizations": definitions["visualizations"];
+  /** Format: bigint */
+  "rowFilter.visualizations.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.visualizations.created_at": string;
+  /** Format: text */
+  "rowFilter.visualizations.name": string;
+  /** Format: text */
+  "rowFilter.visualizations.type": string;
+  /** Format: text */
+  "rowFilter.visualizations.color": string;
+  /** Format: text */
+  "rowFilter.visualizations.description": string;
+  /** Format: text */
+  "rowFilter.visualizations.points": string;
+  /** Format: uuid */
+  "rowFilter.visualizations.user_id": string;
+  /** Format: bigint */
+  "rowFilter.visualizations.part_of": string;
   /** @description published_projects */
   "body.published_projects": definitions["published_projects"];
   /** Format: bigint */
@@ -713,21 +813,6 @@ export interface parameters {
   "rowFilter.locations.latitude": string;
   /** Format: double precision */
   "rowFilter.locations.longitude": string;
-  /**
-   * Format: boolean
-   * @description Is the location "fuzzy" or precisely located in the work?
-   */
-  "rowFilter.locations.is_precise": string;
-  /**
-   * Format: text
-   * @description The relevant quote in English
-   */
-  "rowFilter.locations.quote": string;
-  /**
-   * Format: text
-   * @description The relevant quote in Japanese if available
-   */
-  "rowFilter.locations.quote_original": string;
   /**
    * Format: text
    * @description What work is this setting from?
@@ -749,27 +834,14 @@ export interface parameters {
    */
   "rowFilter.locations.annotation": string;
   /**
-   * Format: date
-   * @description Is the location visited at a certain date? Used for timeline
-   */
-  "rowFilter.locations.date": string;
-  /**
-   * Format: time without time zone
-   * @description Is the location visited at a certain time? Used for timeline
-   */
-  "rowFilter.locations.time": string;
-  /**
-   * Format: boolean
-   * @description Is the location projected (longed for, dreamed about, remembered)?
-   */
-  "rowFilter.locations.is_projected": string;
-  /**
    * Format: bigint
    * @description Which project was this location first introduced with?
    */
   "rowFilter.locations.part_of": string;
   /** Format: uuid */
   "rowFilter.locations.user_id": string;
+  /** Format: text */
+  "rowFilter.locations.name": string;
   /** @description works */
   "body.works": definitions["works"];
   /**

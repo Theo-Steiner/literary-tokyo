@@ -6,6 +6,8 @@
 	import displayedPlaces from '$lib/utils/displayedPlaces';
 	import Line from './MapComponents/Line.svelte';
 	import Area from './MapComponents/Area.svelte';
+	import TrainToggle from './MapComponents/TrainToggle.svelte';
+	import displayedVisualizations from '$lib/utils/displayedVisualizations';
 
 	export let gridRow: string;
 	export let gridColumn: string;
@@ -16,36 +18,40 @@
 			map.resize();
 		}
 	}
-	$: display = $displayedPlaces || [];
 	$: resize(gridRow, gridColumn);
-	onMount(() => map.setCenter([139.6503, 35.6762]));
+	onMount(() => {
+		map.setCenter([139.6503, 35.6762]);
+	});
 </script>
 
 <!-- TODO: refactor to not use grid-row/ column but long-side and short-side and add media query -->
 <div style:grid-row={gridRow} style:grid-column={gridColumn}>
 	<Map
 		accessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
-		style="mapbox://styles/mapbox/streets-v11"
+		style="mapbox://styles/theo-steiner/cl58dsfrx000014msdychp1gu"
 		bind:this={map}
 		options={{ scrollZoom: true, version: 'v2.9.0' }}
 	>
-		{#each display as { character, latitude, longitude, name, quote, book }}
-			<!-- filter -->
-			{#if true}
-				<Marker
-					color={character === 'aomame' ? '#a4d236' : '#151515'}
-					lat={latitude}
-					lng={longitude}
-					label={`<h1>${name}</h1>`}
-				>
-					<div class="content" slot="popup">
-						<h3>{name}</h3>
-					</div>
-				</Marker>
+		{#each $displayedPlaces as { tags, latitude, longitude, name }}
+			<Marker
+				color={tags?.includes('aomame') ? '#a4d236' : '#151515'}
+				lat={latitude}
+				lng={longitude}
+				label={`<h1>${name}</h1>`}
+			>
+				<div class="content" slot="popup">
+					<h3>{name}</h3>
+				</div>
+			</Marker>
+		{/each}
+		{#each $displayedVisualizations as { name, color, points, type }}
+			{#if type.toLowerCase() === 'path'}
+				<Line {points} {color} {name} />
+			{:else if type.toLowerCase() === 'area'}
+				<Area {points} {color} {name} />
 			{/if}
 		{/each}
-		<Line />
-		<Area />
+		<TrainToggle />
 	</Map>
 </div>
 
