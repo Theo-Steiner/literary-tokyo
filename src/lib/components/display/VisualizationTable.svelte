@@ -4,9 +4,9 @@
 	export let visualizations: Visualizations;
 	const toggleSelect = (visualization: Visualization, isSelected: boolean) => {
 		if (isSelected) {
-			$displayedVisualizations = visualizations;
+			$displayedVisualizations = $displayedVisualizations.filter((v) => v.id !== visualization.id);
 		} else {
-			$displayedVisualizations = [visualization];
+			$displayedVisualizations = [...$displayedVisualizations, visualization];
 		}
 	};
 </script>
@@ -15,8 +15,7 @@
 <table>
 	<tr><th>name</th><th>type</th></tr>
 	{#each visualizations as visualization (visualization.id)}
-		{@const isSelected =
-			$displayedVisualizations[0]?.id === visualization.id && $displayedVisualizations.length == 1}
+		{@const isSelected = $displayedVisualizations.some((v) => v.id === visualization.id)}
 		<tr class:selected={isSelected} on:click={() => toggleSelect(visualization, isSelected)}
 			><td>{visualization.name}</td><td>{visualization.type}</td></tr
 		>
