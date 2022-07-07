@@ -6,38 +6,64 @@
 	export let name: string;
 	export let color = 'yellow';
 	export let points: string;
-	$: coordinates = convertToPointsArray(points);
-	const map = getMap();
 
-	$: console.log(coordinates);
+	const map = getMap();
+	let initialized = false;
+
 	const sourceId = `${name}-line-source`;
 	const lineLayerId = `${name}-line-layer`;
 
-	onMount(() => {
-		map
-			.addSource(sourceId, {
-				type: 'geojson',
-				data: {
-					type: 'Feature',
-					geometry: {
-						type: 'LineString',
-						coordinates
-					},
-					properties: {}
-				}
-			})
-			.addLayer({
-				id: lineLayerId,
-				type: 'line',
-				source: sourceId,
-				paint: {
-					'line-color': color,
-					'line-width': 2
+	const updateLine = (coordinates: number[][]) => {
+		if (initialized) {
+			map.getSource(sourceId).setData({
+				type: 'Feature',
+				geometry: {
+					type: 'LineString',
+					coordinates
 				}
 			});
+		}
+	};
+
+	$: coordinates = convertToPointsArray(points);
+	$: updateLine(coordinates);
+
+	onMount(() => {
+		const preexisting = map.getSource(sourceId);
+		if (preexisting) {
+			preexisting.setData({
+				type: 'Feature',
+				geometry: {
+					type: 'LineString',
+					coordinates
+				}
+			});
+			map.setLayoutProperty(lineLayerId, 'visibility', 'visible');
+		} else {
+			map
+				.addSource(sourceId, {
+					type: 'geojson',
+					data: {
+						type: 'Feature',
+						geometry: {
+							type: 'LineString',
+							coordinates
+						},
+						properties: {}
+					}
+				})
+				.addLayer({
+					id: lineLayerId,
+					type: 'line',
+					source: sourceId,
+					paint: {
+						'line-color': color,
+						'line-width': 2
+					}
+				});
+		}
 		return () => {
-			map.removeLayer(lineLayerId);
-			map.removeSource(sourceId);
+			map.setLayoutProperty(lineLayerId, 'visibility', 'none');
 		};
 	});
 </script>

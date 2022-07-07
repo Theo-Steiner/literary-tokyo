@@ -33,41 +33,53 @@
 	$: updatePolygon(polygon);
 
 	onMount(() => {
-		map
-			.addSource(sourceId, {
-				type: 'geojson',
-				data: {
-					type: 'Feature',
-					geometry: {
-						type: 'Polygon',
-						coordinates: [polygon]
-					}
-				}
-			})
-			.addLayer({
-				id: areaLayerId,
-				type: 'fill',
-				source: sourceId,
-				layout: {},
-				paint: {
-					'fill-color': color,
-					'fill-opacity': 0.3
-				}
-			})
-			.addLayer({
-				id: outlineLayerId,
-				type: 'line',
-				source: sourceId,
-				layout: {},
-				paint: {
-					'line-color': '#000',
-					'line-width': 1
+		const preexisting = map.getSource(sourceId);
+		if (preexisting) {
+			preexisting.setData({
+				type: 'Feature',
+				geometry: {
+					type: 'Polygon',
+					coordinates: [polygon]
 				}
 			});
+			map.setLayoutProperty(areaLayerId, 'visibility', 'visible');
+			map.setLayoutProperty(outlineLayerId, 'visibility', 'visible');
+		} else {
+			map
+				.addSource(sourceId, {
+					type: 'geojson',
+					data: {
+						type: 'Feature',
+						geometry: {
+							type: 'Polygon',
+							coordinates: [polygon]
+						}
+					}
+				})
+				.addLayer({
+					id: areaLayerId,
+					type: 'fill',
+					source: sourceId,
+					layout: {},
+					paint: {
+						'fill-color': color,
+						'fill-opacity': 0.3
+					}
+				})
+				.addLayer({
+					id: outlineLayerId,
+					type: 'line',
+					source: sourceId,
+					layout: {},
+					paint: {
+						'line-color': '#000',
+						'line-width': 1
+					}
+				});
+		}
 		return () => {
-			map.removeLayer(areaLayerId);
-			map.removeLayer(outlineLayerId);
-			map.removeSource(sourceId);
+			map.setLayoutProperty(areaLayerId, 'visibility', 'none');
+			map.setLayoutProperty(outlineLayerId, 'visibility', 'none');
 		};
 	});
 </script>
