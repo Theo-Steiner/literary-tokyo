@@ -41,7 +41,7 @@
 				name="userPassword"
 				placeholder="*****"
 			/>
-			Your email address
+			Your password
 		</label>
 		<button type="submit">{mode}</button>
 		{#if mode === 'login'}
