@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { contextKey } from '@beyonk/svelte-mapbox';
+	import type { LongLat } from '$lib/types/derived-types';
 	const { getMap } = getContext(contextKey);
 	export let name: string;
 	export let color = 'yellow';
-	export let points: string;
+	export let points: LongLat[];
 
 	const map = getMap();
 	let initialized = false;

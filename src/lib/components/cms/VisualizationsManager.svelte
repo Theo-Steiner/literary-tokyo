@@ -8,7 +8,6 @@
 	import type { Works, Locations, Visualizations } from '$lib/types/derived-types';
 	import { tick } from 'svelte';
 	import LocationTable from '../display/LocationTable.svelte';
-	import { convertToPointString } from '$lib/utils/utils';
 	import VisualizationTable from '../display/VisualizationTable.svelte';
 
 	export let projectId: number;
@@ -33,11 +32,12 @@
 		}
 	};
 
-	const removeLocation = (e) => {
+	const removeLocation = (e: CustomEvent) => {
 		addedLocations = addedLocations.filter((location) => location.id !== e.detail.id);
 	};
 
-	async function createTentativePlace(..._args: string[]) {
+	// TODO: flesh out this function
+	async function createTentativeLocation(..._args: string[]) {
 		await tick();
 		await tick();
 	}
@@ -51,7 +51,8 @@
 			description,
 			type,
 			color,
-			points: convertToPointString(addedLocations.map((l) => [l.longitude, l.latitude])),
+			// TODO: implement ability to add points only for visualizations
+			points: addedLocations.map(({ id }) => id),
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			user_id: $userStore!.user!.id,
 			part_of: projectId

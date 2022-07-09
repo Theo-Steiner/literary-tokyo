@@ -4,872 +4,872 @@
  */
 
 export interface paths {
-  "/": {
-    get: {
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/projects": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.projects.id"];
-          created_at?: parameters["rowFilter.projects.created_at"];
-          /** Title of a project */
-          title?: parameters["rowFilter.projects.title"];
-          /** Author of a project */
-          author?: parameters["rowFilter.projects.author"];
-          user_id?: parameters["rowFilter.projects.user_id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["projects"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** projects */
-          projects?: definitions["projects"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.projects.id"];
-          created_at?: parameters["rowFilter.projects.created_at"];
-          /** Title of a project */
-          title?: parameters["rowFilter.projects.title"];
-          /** Author of a project */
-          author?: parameters["rowFilter.projects.author"];
-          user_id?: parameters["rowFilter.projects.user_id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.projects.id"];
-          created_at?: parameters["rowFilter.projects.created_at"];
-          /** Title of a project */
-          title?: parameters["rowFilter.projects.title"];
-          /** Author of a project */
-          author?: parameters["rowFilter.projects.author"];
-          user_id?: parameters["rowFilter.projects.user_id"];
-        };
-        body: {
-          /** projects */
-          projects?: definitions["projects"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/visualizations": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.visualizations.id"];
-          created_at?: parameters["rowFilter.visualizations.created_at"];
-          name?: parameters["rowFilter.visualizations.name"];
-          type?: parameters["rowFilter.visualizations.type"];
-          color?: parameters["rowFilter.visualizations.color"];
-          description?: parameters["rowFilter.visualizations.description"];
-          points?: parameters["rowFilter.visualizations.points"];
-          user_id?: parameters["rowFilter.visualizations.user_id"];
-          part_of?: parameters["rowFilter.visualizations.part_of"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["visualizations"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** visualizations */
-          visualizations?: definitions["visualizations"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.visualizations.id"];
-          created_at?: parameters["rowFilter.visualizations.created_at"];
-          name?: parameters["rowFilter.visualizations.name"];
-          type?: parameters["rowFilter.visualizations.type"];
-          color?: parameters["rowFilter.visualizations.color"];
-          description?: parameters["rowFilter.visualizations.description"];
-          points?: parameters["rowFilter.visualizations.points"];
-          user_id?: parameters["rowFilter.visualizations.user_id"];
-          part_of?: parameters["rowFilter.visualizations.part_of"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.visualizations.id"];
-          created_at?: parameters["rowFilter.visualizations.created_at"];
-          name?: parameters["rowFilter.visualizations.name"];
-          type?: parameters["rowFilter.visualizations.type"];
-          color?: parameters["rowFilter.visualizations.color"];
-          description?: parameters["rowFilter.visualizations.description"];
-          points?: parameters["rowFilter.visualizations.points"];
-          user_id?: parameters["rowFilter.visualizations.user_id"];
-          part_of?: parameters["rowFilter.visualizations.part_of"];
-        };
-        body: {
-          /** visualizations */
-          visualizations?: definitions["visualizations"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/published_projects": {
-    get: {
-      parameters: {
-        query: {
-          project_id?: parameters["rowFilter.published_projects.project_id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["published_projects"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** published_projects */
-          published_projects?: definitions["published_projects"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          project_id?: parameters["rowFilter.published_projects.project_id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          project_id?: parameters["rowFilter.published_projects.project_id"];
-        };
-        body: {
-          /** published_projects */
-          published_projects?: definitions["published_projects"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/locations": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.locations.id"];
-          created_at?: parameters["rowFilter.locations.created_at"];
-          latitude?: parameters["rowFilter.locations.latitude"];
-          longitude?: parameters["rowFilter.locations.longitude"];
-          /** What work is this setting from? */
-          source?: parameters["rowFilter.locations.source"];
-          /** What page of that source is it on? */
-          page?: parameters["rowFilter.locations.page"];
-          /** Tags by which locations can be filtered */
-          tags?: parameters["rowFilter.locations.tags"];
-          /** Comments by the project owner */
-          annotation?: parameters["rowFilter.locations.annotation"];
-          /** Which project was this location first introduced with? */
-          part_of?: parameters["rowFilter.locations.part_of"];
-          user_id?: parameters["rowFilter.locations.user_id"];
-          name?: parameters["rowFilter.locations.name"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["locations"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** locations */
-          locations?: definitions["locations"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.locations.id"];
-          created_at?: parameters["rowFilter.locations.created_at"];
-          latitude?: parameters["rowFilter.locations.latitude"];
-          longitude?: parameters["rowFilter.locations.longitude"];
-          /** What work is this setting from? */
-          source?: parameters["rowFilter.locations.source"];
-          /** What page of that source is it on? */
-          page?: parameters["rowFilter.locations.page"];
-          /** Tags by which locations can be filtered */
-          tags?: parameters["rowFilter.locations.tags"];
-          /** Comments by the project owner */
-          annotation?: parameters["rowFilter.locations.annotation"];
-          /** Which project was this location first introduced with? */
-          part_of?: parameters["rowFilter.locations.part_of"];
-          user_id?: parameters["rowFilter.locations.user_id"];
-          name?: parameters["rowFilter.locations.name"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.locations.id"];
-          created_at?: parameters["rowFilter.locations.created_at"];
-          latitude?: parameters["rowFilter.locations.latitude"];
-          longitude?: parameters["rowFilter.locations.longitude"];
-          /** What work is this setting from? */
-          source?: parameters["rowFilter.locations.source"];
-          /** What page of that source is it on? */
-          page?: parameters["rowFilter.locations.page"];
-          /** Tags by which locations can be filtered */
-          tags?: parameters["rowFilter.locations.tags"];
-          /** Comments by the project owner */
-          annotation?: parameters["rowFilter.locations.annotation"];
-          /** Which project was this location first introduced with? */
-          part_of?: parameters["rowFilter.locations.part_of"];
-          user_id?: parameters["rowFilter.locations.user_id"];
-          name?: parameters["rowFilter.locations.name"];
-        };
-        body: {
-          /** locations */
-          locations?: definitions["locations"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/works": {
-    get: {
-      parameters: {
-        query: {
-          /** Work of the novel. must be unique */
-          title?: parameters["rowFilter.works.title"];
-          created_at?: parameters["rowFilter.works.created_at"];
-          /** How to cite this novel? */
-          citation?: parameters["rowFilter.works.citation"];
-          /** Who's the author of this novel? */
-          author?: parameters["rowFilter.works.author"];
-          /** What project was this novel first introduced with? */
-          part_of?: parameters["rowFilter.works.part_of"];
-          year?: parameters["rowFilter.works.year"];
-          user_id?: parameters["rowFilter.works.user_id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["works"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** works */
-          works?: definitions["works"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          /** Work of the novel. must be unique */
-          title?: parameters["rowFilter.works.title"];
-          created_at?: parameters["rowFilter.works.created_at"];
-          /** How to cite this novel? */
-          citation?: parameters["rowFilter.works.citation"];
-          /** Who's the author of this novel? */
-          author?: parameters["rowFilter.works.author"];
-          /** What project was this novel first introduced with? */
-          part_of?: parameters["rowFilter.works.part_of"];
-          year?: parameters["rowFilter.works.year"];
-          user_id?: parameters["rowFilter.works.user_id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          /** Work of the novel. must be unique */
-          title?: parameters["rowFilter.works.title"];
-          created_at?: parameters["rowFilter.works.created_at"];
-          /** How to cite this novel? */
-          citation?: parameters["rowFilter.works.citation"];
-          /** Who's the author of this novel? */
-          author?: parameters["rowFilter.works.author"];
-          /** What project was this novel first introduced with? */
-          part_of?: parameters["rowFilter.works.part_of"];
-          year?: parameters["rowFilter.works.year"];
-          user_id?: parameters["rowFilter.works.user_id"];
-        };
-        body: {
-          /** works */
-          works?: definitions["works"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
+	'/': {
+		get: {
+			responses: {
+				/** OK */
+				200: unknown;
+			};
+		};
+	};
+	'/projects': {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.projects.id'];
+					created_at?: parameters['rowFilter.projects.created_at'];
+					/** Title of a project */
+					title?: parameters['rowFilter.projects.title'];
+					/** Author of a project */
+					author?: parameters['rowFilter.projects.author'];
+					user_id?: parameters['rowFilter.projects.user_id'];
+					/** Filtering Columns */
+					select?: parameters['select'];
+					/** Ordering */
+					order?: parameters['order'];
+					/** Limiting and Pagination */
+					offset?: parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions['projects'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** projects */
+					projects?: definitions['projects'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.projects.id'];
+					created_at?: parameters['rowFilter.projects.created_at'];
+					/** Title of a project */
+					title?: parameters['rowFilter.projects.title'];
+					/** Author of a project */
+					author?: parameters['rowFilter.projects.author'];
+					user_id?: parameters['rowFilter.projects.user_id'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.projects.id'];
+					created_at?: parameters['rowFilter.projects.created_at'];
+					/** Title of a project */
+					title?: parameters['rowFilter.projects.title'];
+					/** Author of a project */
+					author?: parameters['rowFilter.projects.author'];
+					user_id?: parameters['rowFilter.projects.user_id'];
+				};
+				body: {
+					/** projects */
+					projects?: definitions['projects'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/visualizations': {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.visualizations.id'];
+					created_at?: parameters['rowFilter.visualizations.created_at'];
+					name?: parameters['rowFilter.visualizations.name'];
+					type?: parameters['rowFilter.visualizations.type'];
+					color?: parameters['rowFilter.visualizations.color'];
+					description?: parameters['rowFilter.visualizations.description'];
+					user_id?: parameters['rowFilter.visualizations.user_id'];
+					part_of?: parameters['rowFilter.visualizations.part_of'];
+					points?: parameters['rowFilter.visualizations.points'];
+					/** Filtering Columns */
+					select?: parameters['select'];
+					/** Ordering */
+					order?: parameters['order'];
+					/** Limiting and Pagination */
+					offset?: parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions['visualizations'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** visualizations */
+					visualizations?: definitions['visualizations'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.visualizations.id'];
+					created_at?: parameters['rowFilter.visualizations.created_at'];
+					name?: parameters['rowFilter.visualizations.name'];
+					type?: parameters['rowFilter.visualizations.type'];
+					color?: parameters['rowFilter.visualizations.color'];
+					description?: parameters['rowFilter.visualizations.description'];
+					user_id?: parameters['rowFilter.visualizations.user_id'];
+					part_of?: parameters['rowFilter.visualizations.part_of'];
+					points?: parameters['rowFilter.visualizations.points'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.visualizations.id'];
+					created_at?: parameters['rowFilter.visualizations.created_at'];
+					name?: parameters['rowFilter.visualizations.name'];
+					type?: parameters['rowFilter.visualizations.type'];
+					color?: parameters['rowFilter.visualizations.color'];
+					description?: parameters['rowFilter.visualizations.description'];
+					user_id?: parameters['rowFilter.visualizations.user_id'];
+					part_of?: parameters['rowFilter.visualizations.part_of'];
+					points?: parameters['rowFilter.visualizations.points'];
+				};
+				body: {
+					/** visualizations */
+					visualizations?: definitions['visualizations'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/published_projects': {
+		get: {
+			parameters: {
+				query: {
+					project_id?: parameters['rowFilter.published_projects.project_id'];
+					/** Filtering Columns */
+					select?: parameters['select'];
+					/** Ordering */
+					order?: parameters['order'];
+					/** Limiting and Pagination */
+					offset?: parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions['published_projects'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** published_projects */
+					published_projects?: definitions['published_projects'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					project_id?: parameters['rowFilter.published_projects.project_id'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					project_id?: parameters['rowFilter.published_projects.project_id'];
+				};
+				body: {
+					/** published_projects */
+					published_projects?: definitions['published_projects'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/locations': {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.locations.id'];
+					created_at?: parameters['rowFilter.locations.created_at'];
+					latitude?: parameters['rowFilter.locations.latitude'];
+					longitude?: parameters['rowFilter.locations.longitude'];
+					/** What work is this setting from? */
+					source?: parameters['rowFilter.locations.source'];
+					/** What page of that source is it on? */
+					page?: parameters['rowFilter.locations.page'];
+					/** Tags by which locations can be filtered */
+					tags?: parameters['rowFilter.locations.tags'];
+					/** Comments by the project owner */
+					annotation?: parameters['rowFilter.locations.annotation'];
+					/** Which project was this location first introduced with? */
+					part_of?: parameters['rowFilter.locations.part_of'];
+					user_id?: parameters['rowFilter.locations.user_id'];
+					name?: parameters['rowFilter.locations.name'];
+					/** Filtering Columns */
+					select?: parameters['select'];
+					/** Ordering */
+					order?: parameters['order'];
+					/** Limiting and Pagination */
+					offset?: parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions['locations'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** locations */
+					locations?: definitions['locations'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.locations.id'];
+					created_at?: parameters['rowFilter.locations.created_at'];
+					latitude?: parameters['rowFilter.locations.latitude'];
+					longitude?: parameters['rowFilter.locations.longitude'];
+					/** What work is this setting from? */
+					source?: parameters['rowFilter.locations.source'];
+					/** What page of that source is it on? */
+					page?: parameters['rowFilter.locations.page'];
+					/** Tags by which locations can be filtered */
+					tags?: parameters['rowFilter.locations.tags'];
+					/** Comments by the project owner */
+					annotation?: parameters['rowFilter.locations.annotation'];
+					/** Which project was this location first introduced with? */
+					part_of?: parameters['rowFilter.locations.part_of'];
+					user_id?: parameters['rowFilter.locations.user_id'];
+					name?: parameters['rowFilter.locations.name'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters['rowFilter.locations.id'];
+					created_at?: parameters['rowFilter.locations.created_at'];
+					latitude?: parameters['rowFilter.locations.latitude'];
+					longitude?: parameters['rowFilter.locations.longitude'];
+					/** What work is this setting from? */
+					source?: parameters['rowFilter.locations.source'];
+					/** What page of that source is it on? */
+					page?: parameters['rowFilter.locations.page'];
+					/** Tags by which locations can be filtered */
+					tags?: parameters['rowFilter.locations.tags'];
+					/** Comments by the project owner */
+					annotation?: parameters['rowFilter.locations.annotation'];
+					/** Which project was this location first introduced with? */
+					part_of?: parameters['rowFilter.locations.part_of'];
+					user_id?: parameters['rowFilter.locations.user_id'];
+					name?: parameters['rowFilter.locations.name'];
+				};
+				body: {
+					/** locations */
+					locations?: definitions['locations'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	'/works': {
+		get: {
+			parameters: {
+				query: {
+					/** Work of the novel. must be unique */
+					title?: parameters['rowFilter.works.title'];
+					created_at?: parameters['rowFilter.works.created_at'];
+					/** How to cite this novel? */
+					citation?: parameters['rowFilter.works.citation'];
+					/** Who's the author of this novel? */
+					author?: parameters['rowFilter.works.author'];
+					/** What project was this novel first introduced with? */
+					part_of?: parameters['rowFilter.works.part_of'];
+					year?: parameters['rowFilter.works.year'];
+					user_id?: parameters['rowFilter.works.user_id'];
+					/** Filtering Columns */
+					select?: parameters['select'];
+					/** Ordering */
+					order?: parameters['order'];
+					/** Limiting and Pagination */
+					offset?: parameters['offset'];
+					/** Limiting and Pagination */
+					limit?: parameters['limit'];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters['range'];
+					/** Limiting and Pagination */
+					'Range-Unit'?: parameters['rangeUnit'];
+					/** Preference */
+					Prefer?: parameters['preferCount'];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions['works'][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** works */
+					works?: definitions['works'];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters['select'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					/** Work of the novel. must be unique */
+					title?: parameters['rowFilter.works.title'];
+					created_at?: parameters['rowFilter.works.created_at'];
+					/** How to cite this novel? */
+					citation?: parameters['rowFilter.works.citation'];
+					/** Who's the author of this novel? */
+					author?: parameters['rowFilter.works.author'];
+					/** What project was this novel first introduced with? */
+					part_of?: parameters['rowFilter.works.part_of'];
+					year?: parameters['rowFilter.works.year'];
+					user_id?: parameters['rowFilter.works.user_id'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					/** Work of the novel. must be unique */
+					title?: parameters['rowFilter.works.title'];
+					created_at?: parameters['rowFilter.works.created_at'];
+					/** How to cite this novel? */
+					citation?: parameters['rowFilter.works.citation'];
+					/** Who's the author of this novel? */
+					author?: parameters['rowFilter.works.author'];
+					/** What project was this novel first introduced with? */
+					part_of?: parameters['rowFilter.works.part_of'];
+					year?: parameters['rowFilter.works.year'];
+					user_id?: parameters['rowFilter.works.user_id'];
+				};
+				body: {
+					/** works */
+					works?: definitions['works'];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters['preferReturn'];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
 }
 
 export interface definitions {
-  /** @description Projects created by users */
-  projects: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string;
-    /**
-     * Format: text
-     * @description Title of a project
-     */
-    title: string;
-    /**
-     * Format: text
-     * @description Author of a project
-     */
-    author: string;
-    /** Format: uuid */
-    user_id: string;
-  };
-  /** @description Visualizations for a novel */
-  visualizations: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string;
-    /** Format: text */
-    name: string;
-    /** Format: text */
-    type: string;
-    /** Format: text */
-    color?: string;
-    /** Format: text */
-    description: string;
-    /** Format: text */
-    points: string;
-    /** Format: uuid */
-    user_id: string;
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
-     */
-    part_of?: number;
-  };
-  /** @description A table with all published projects. To publish a project, it has to be added here. */
-  published_projects: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
-     */
-    project_id: number;
-  };
-  /** @description Locations are data points sourced from novels */
-  locations: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string;
-    /** Format: double precision */
-    latitude: number;
-    /** Format: double precision */
-    longitude: number;
-    /**
-     * Format: text
-     * @description What work is this setting from?
-     *
-     * Note:
-     * This is a Foreign Key to `works.title`.<fk table='works' column='title'/>
-     */
-    source: string;
-    /**
-     * Format: text
-     * @description What page of that source is it on?
-     */
-    page: string;
-    /**
-     * Format: ARRAY
-     * @description Tags by which locations can be filtered
-     */
-    tags?: string[];
-    /**
-     * Format: text
-     * @description Comments by the project owner
-     */
-    annotation?: string;
-    /**
-     * Format: bigint
-     * @description Which project was this location first introduced with?
-     *
-     * Note:
-     * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
-     */
-    part_of?: number;
-    /** Format: uuid */
-    user_id: string;
-    /** Format: text */
-    name: string;
-  };
-  /** @description works from where data points are extracted to be visualized on a map of Tokyo. */
-  works: {
-    /**
-     * Format: text
-     * @description Work of the novel. must be unique
-     *
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    title: string;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string;
-    /**
-     * Format: text
-     * @description How to cite this novel?
-     */
-    citation?: string;
-    /**
-     * Format: text
-     * @description Who's the author of this novel?
-     */
-    author: string;
-    /**
-     * Format: bigint
-     * @description What project was this novel first introduced with?
-     *
-     * Note:
-     * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
-     */
-    part_of: number;
-    /** Format: text */
-    year: string;
-    /** Format: uuid */
-    user_id: string;
-  };
+	/** @description Projects created by users */
+	projects: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/**
+		 * Format: text
+		 * @description Title of a project
+		 */
+		title: string;
+		/**
+		 * Format: text
+		 * @description Author of a project
+		 */
+		author: string;
+		/** Format: uuid */
+		user_id: string;
+	};
+	/** @description Visualizations for a novel */
+	visualizations: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/** Format: text */
+		name: string;
+		/** Format: text */
+		type: string;
+		/** Format: text */
+		color?: string;
+		/** Format: text */
+		description: string;
+		/** Format: uuid */
+		user_id: string;
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
+		 */
+		part_of?: number;
+		/** Format: ARRAY */
+		points?: unknown[];
+	};
+	/** @description A table with all published projects. To publish a project, it has to be added here. */
+	published_projects: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
+		 */
+		project_id: number;
+	};
+	/** @description Locations are data points sourced from novels */
+	locations: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/** Format: double precision */
+		latitude: number;
+		/** Format: double precision */
+		longitude: number;
+		/**
+		 * Format: text
+		 * @description What work is this setting from?
+		 *
+		 * Note:
+		 * This is a Foreign Key to `works.title`.<fk table='works' column='title'/>
+		 */
+		source: string;
+		/**
+		 * Format: text
+		 * @description What page of that source is it on?
+		 */
+		page: string;
+		/**
+		 * Format: ARRAY
+		 * @description Tags by which locations can be filtered
+		 */
+		tags?: unknown[];
+		/**
+		 * Format: text
+		 * @description Comments by the project owner
+		 */
+		annotation?: string;
+		/**
+		 * Format: bigint
+		 * @description Which project was this location first introduced with?
+		 *
+		 * Note:
+		 * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
+		 */
+		part_of?: number;
+		/** Format: uuid */
+		user_id: string;
+		/** Format: text */
+		name: string;
+	};
+	/** @description works from where data points are extracted to be visualized on a map of Tokyo. */
+	works: {
+		/**
+		 * Format: text
+		 * @description Work of the novel. must be unique
+		 *
+		 * Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		title: string;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/**
+		 * Format: text
+		 * @description How to cite this novel?
+		 */
+		citation?: string;
+		/**
+		 * Format: text
+		 * @description Who's the author of this novel?
+		 */
+		author: string;
+		/**
+		 * Format: bigint
+		 * @description What project was this novel first introduced with?
+		 *
+		 * Note:
+		 * This is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>
+		 */
+		part_of: number;
+		/** Format: text */
+		year: string;
+		/** Format: uuid */
+		user_id: string;
+	};
 }
 
 export interface parameters {
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferParams: "params=single-object";
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferReturn: "return=representation" | "return=minimal" | "return=none";
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferCount: "count=none";
-  /** @description Filtering Columns */
-  select: string;
-  /** @description On Conflict */
-  on_conflict: string;
-  /** @description Ordering */
-  order: string;
-  /** @description Limiting and Pagination */
-  range: string;
-  /**
-   * @description Limiting and Pagination
-   * @default items
-   */
-  rangeUnit: string;
-  /** @description Limiting and Pagination */
-  offset: string;
-  /** @description Limiting and Pagination */
-  limit: string;
-  /** @description projects */
-  "body.projects": definitions["projects"];
-  /** Format: bigint */
-  "rowFilter.projects.id": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.projects.created_at": string;
-  /**
-   * Format: text
-   * @description Title of a project
-   */
-  "rowFilter.projects.title": string;
-  /**
-   * Format: text
-   * @description Author of a project
-   */
-  "rowFilter.projects.author": string;
-  /** Format: uuid */
-  "rowFilter.projects.user_id": string;
-  /** @description visualizations */
-  "body.visualizations": definitions["visualizations"];
-  /** Format: bigint */
-  "rowFilter.visualizations.id": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.visualizations.created_at": string;
-  /** Format: text */
-  "rowFilter.visualizations.name": string;
-  /** Format: text */
-  "rowFilter.visualizations.type": string;
-  /** Format: text */
-  "rowFilter.visualizations.color": string;
-  /** Format: text */
-  "rowFilter.visualizations.description": string;
-  /** Format: text */
-  "rowFilter.visualizations.points": string;
-  /** Format: uuid */
-  "rowFilter.visualizations.user_id": string;
-  /** Format: bigint */
-  "rowFilter.visualizations.part_of": string;
-  /** @description published_projects */
-  "body.published_projects": definitions["published_projects"];
-  /** Format: bigint */
-  "rowFilter.published_projects.project_id": string;
-  /** @description locations */
-  "body.locations": definitions["locations"];
-  /** Format: bigint */
-  "rowFilter.locations.id": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.locations.created_at": string;
-  /** Format: double precision */
-  "rowFilter.locations.latitude": string;
-  /** Format: double precision */
-  "rowFilter.locations.longitude": string;
-  /**
-   * Format: text
-   * @description What work is this setting from?
-   */
-  "rowFilter.locations.source": string;
-  /**
-   * Format: text
-   * @description What page of that source is it on?
-   */
-  "rowFilter.locations.page": string;
-  /**
-   * Format: ARRAY
-   * @description Tags by which locations can be filtered
-   */
-  "rowFilter.locations.tags": string;
-  /**
-   * Format: text
-   * @description Comments by the project owner
-   */
-  "rowFilter.locations.annotation": string;
-  /**
-   * Format: bigint
-   * @description Which project was this location first introduced with?
-   */
-  "rowFilter.locations.part_of": string;
-  /** Format: uuid */
-  "rowFilter.locations.user_id": string;
-  /** Format: text */
-  "rowFilter.locations.name": string;
-  /** @description works */
-  "body.works": definitions["works"];
-  /**
-   * Format: text
-   * @description Work of the novel. must be unique
-   */
-  "rowFilter.works.title": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.works.created_at": string;
-  /**
-   * Format: text
-   * @description How to cite this novel?
-   */
-  "rowFilter.works.citation": string;
-  /**
-   * Format: text
-   * @description Who's the author of this novel?
-   */
-  "rowFilter.works.author": string;
-  /**
-   * Format: bigint
-   * @description What project was this novel first introduced with?
-   */
-  "rowFilter.works.part_of": string;
-  /** Format: text */
-  "rowFilter.works.year": string;
-  /** Format: uuid */
-  "rowFilter.works.user_id": string;
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferParams: 'params=single-object';
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferReturn: 'return=representation' | 'return=minimal' | 'return=none';
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferCount: 'count=none';
+	/** @description Filtering Columns */
+	select: string;
+	/** @description On Conflict */
+	on_conflict: string;
+	/** @description Ordering */
+	order: string;
+	/** @description Limiting and Pagination */
+	range: string;
+	/**
+	 * @description Limiting and Pagination
+	 * @default items
+	 */
+	rangeUnit: string;
+	/** @description Limiting and Pagination */
+	offset: string;
+	/** @description Limiting and Pagination */
+	limit: string;
+	/** @description projects */
+	'body.projects': definitions['projects'];
+	/** Format: bigint */
+	'rowFilter.projects.id': string;
+	/** Format: timestamp with time zone */
+	'rowFilter.projects.created_at': string;
+	/**
+	 * Format: text
+	 * @description Title of a project
+	 */
+	'rowFilter.projects.title': string;
+	/**
+	 * Format: text
+	 * @description Author of a project
+	 */
+	'rowFilter.projects.author': string;
+	/** Format: uuid */
+	'rowFilter.projects.user_id': string;
+	/** @description visualizations */
+	'body.visualizations': definitions['visualizations'];
+	/** Format: bigint */
+	'rowFilter.visualizations.id': string;
+	/** Format: timestamp with time zone */
+	'rowFilter.visualizations.created_at': string;
+	/** Format: text */
+	'rowFilter.visualizations.name': string;
+	/** Format: text */
+	'rowFilter.visualizations.type': string;
+	/** Format: text */
+	'rowFilter.visualizations.color': string;
+	/** Format: text */
+	'rowFilter.visualizations.description': string;
+	/** Format: uuid */
+	'rowFilter.visualizations.user_id': string;
+	/** Format: bigint */
+	'rowFilter.visualizations.part_of': string;
+	/** Format: ARRAY */
+	'rowFilter.visualizations.points': string;
+	/** @description published_projects */
+	'body.published_projects': definitions['published_projects'];
+	/** Format: bigint */
+	'rowFilter.published_projects.project_id': string;
+	/** @description locations */
+	'body.locations': definitions['locations'];
+	/** Format: bigint */
+	'rowFilter.locations.id': string;
+	/** Format: timestamp with time zone */
+	'rowFilter.locations.created_at': string;
+	/** Format: double precision */
+	'rowFilter.locations.latitude': string;
+	/** Format: double precision */
+	'rowFilter.locations.longitude': string;
+	/**
+	 * Format: text
+	 * @description What work is this setting from?
+	 */
+	'rowFilter.locations.source': string;
+	/**
+	 * Format: text
+	 * @description What page of that source is it on?
+	 */
+	'rowFilter.locations.page': string;
+	/**
+	 * Format: ARRAY
+	 * @description Tags by which locations can be filtered
+	 */
+	'rowFilter.locations.tags': string;
+	/**
+	 * Format: text
+	 * @description Comments by the project owner
+	 */
+	'rowFilter.locations.annotation': string;
+	/**
+	 * Format: bigint
+	 * @description Which project was this location first introduced with?
+	 */
+	'rowFilter.locations.part_of': string;
+	/** Format: uuid */
+	'rowFilter.locations.user_id': string;
+	/** Format: text */
+	'rowFilter.locations.name': string;
+	/** @description works */
+	'body.works': definitions['works'];
+	/**
+	 * Format: text
+	 * @description Work of the novel. must be unique
+	 */
+	'rowFilter.works.title': string;
+	/** Format: timestamp with time zone */
+	'rowFilter.works.created_at': string;
+	/**
+	 * Format: text
+	 * @description How to cite this novel?
+	 */
+	'rowFilter.works.citation': string;
+	/**
+	 * Format: text
+	 * @description Who's the author of this novel?
+	 */
+	'rowFilter.works.author': string;
+	/**
+	 * Format: bigint
+	 * @description What project was this novel first introduced with?
+	 */
+	'rowFilter.works.part_of': string;
+	/** Format: text */
+	'rowFilter.works.year': string;
+	/** Format: uuid */
+	'rowFilter.works.user_id': string;
 }
 
 export interface operations {}

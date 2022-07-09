@@ -32,7 +32,7 @@
 		bind:this={map}
 		options={{ scrollZoom: true, version: 'v2.9.0' }}
 	>
-		{#each $displayedPlaces as { tags, latitude, longitude, name }}
+		{#each $displayedPlaces as { tags, latitude, longitude, name, id } (id)}
 			<Marker
 				color={tags?.includes('aomame') ? '#a4d236' : '#151515'}
 				lat={latitude}

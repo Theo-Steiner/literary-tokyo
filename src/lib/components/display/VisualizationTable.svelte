@@ -25,7 +25,7 @@
 		}
 	);
 
-	const toggleSelect = (visualization: Visualization, isSelected: boolean) => {
+	const toggleSelect = (visualization: MappedVisualization, isSelected: boolean) => {
 		if (isSelected) {
 			$displayedVisualizations = $displayedVisualizations.filter(
 				({ id }) => visualization.id !== id

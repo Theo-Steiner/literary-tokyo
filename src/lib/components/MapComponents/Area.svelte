@@ -2,8 +2,9 @@
 	import { onMount, getContext } from 'svelte';
 	import { contextKey } from '@beyonk/svelte-mapbox';
 	import concaveman from 'concaveman';
+	import type { LongLat } from '$lib/types/derived-types';
 	export let name: string;
-	export let points: string;
+	export let points: LongLat[];
 	export let color = 'white';
 
 	const { getMap } = getContext(contextKey);

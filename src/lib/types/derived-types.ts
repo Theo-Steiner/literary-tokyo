@@ -4,9 +4,14 @@ export type Project = definitions['projects'];
 export type Projects = Project[];
 export type Work = definitions['works'];
 export type Works = Work[];
-export type Location = definitions['locations'];
+export interface Location extends Omit<definitions['locations'], 'tags'> {
+	tags: string[];
+}
 export type Locations = Location[];
-export type Visualization = definitions['visualizations'];
+export interface Visualization extends Omit<definitions['visualizations'], 'points'> {
+	points: string[];
+}
+
 export type Visualizations = Visualization[];
 
 export type LongLat = [number, number];
