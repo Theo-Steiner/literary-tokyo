@@ -2,7 +2,6 @@
 	import { onMount, getContext } from 'svelte';
 	import { contextKey } from '@beyonk/svelte-mapbox';
 	import concaveman from 'concaveman';
-	import { convertToPointsArray } from '$lib/utils/utils';
 	export let name: string;
 	export let points: string;
 	export let color = 'white';
@@ -16,7 +15,7 @@
 	const outlineLayerId = `${name}-area-outline-layer`;
 
 	// calculate a concave hull for a set of coordinates if necessary
-	$: polygon = concaveman(convertToPointsArray(points));
+	$: polygon = concaveman(points);
 
 	const updatePolygon = (polygon: number[]) => {
 		if (initialized) {

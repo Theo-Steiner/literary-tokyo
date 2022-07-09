@@ -37,7 +37,7 @@
 <style>
 	button {
 		position: absolute;
-		z-index: 299;
+		z-index: 1;
 		bottom: 2rem;
 		right: 2rem;
 	}

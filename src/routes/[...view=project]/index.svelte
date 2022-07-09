@@ -15,7 +15,7 @@
 	<h2>{project.title}</h2>
 </header>
 <section>
-	<VisualizationsDisplay {visualizations} />
+	<VisualizationsDisplay {locations} {visualizations} />
 	<LocationsDisplay {works} {locations} />
 </section>
 <footer>

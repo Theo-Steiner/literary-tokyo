@@ -1,11 +1,12 @@
 <script lang="ts">
-	import type { Works, Locations, Visualizations } from '$lib/types/derived-types';
+	import type { Locations, Visualizations } from '$lib/types/derived-types';
 	import VisualizationTable from '../display/VisualizationTable.svelte';
 	export let visualizations: Visualizations;
+	export let locations: Locations;
 </script>
 
 <section>
-	<VisualizationTable {visualizations} />
+	<VisualizationTable {locations} {visualizations} />
 </section>
 
 <style>

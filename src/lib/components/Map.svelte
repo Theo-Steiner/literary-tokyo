@@ -44,7 +44,7 @@
 				</div>
 			</Marker>
 		{/each}
-		{#each $displayedVisualizations as { name, color, points, type }}
+		{#each $displayedVisualizations as { name, color, points, type, id } (id)}
 			{#if type.toLowerCase() === 'path'}
 				<Line {points} {color} {name} />
 			{:else if type.toLowerCase() === 'area'}

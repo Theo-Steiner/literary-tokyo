@@ -8,3 +8,10 @@ export type Location = definitions['locations'];
 export type Locations = Location[];
 export type Visualization = definitions['visualizations'];
 export type Visualizations = Visualization[];
+
+export type LongLat = [number, number];
+
+export interface MappedVisualization extends Omit<Visualization, 'points'> {
+	points: LongLat[];
+}
+export type MappedVisualizations = MappedVisualization[];

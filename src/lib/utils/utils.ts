@@ -1,3 +1,5 @@
+import type { Locations, LongLat } from '$lib/types/derived-types';
+
 export function generateSlug(title: string) {
 	const slug = encodeURI(bijectiveToLowerCase(title).replace(/\s/g, '-'));
 	return slug;
@@ -51,4 +53,18 @@ export function convertToPointsArray(pointString: string) {
 			return [...prev, [parseFloat(coordinates[0]), parseFloat(coordinates[1])]];
 		} else return prev;
 	}, []);
+}
+
+export function getPointsArrayFromLocations(points: string[], locations: Locations): LongLat[] {
+	const pointsArray = points.map((point) => {
+		if (point.includes(';')) {
+			return convertToPointsArray(point);
+		}
+		const location = locations.find((location) => location.id === Number(point));
+		if (location) {
+			return [Number(location.longitude), Number(location.latitude)];
+		}
+		throw new Error(`Location with id ${point} not found. `);
+	});
+	return pointsArray as LongLat[];
 }

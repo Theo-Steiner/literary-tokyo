@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { contextKey } from '@beyonk/svelte-mapbox';
-	import { convertToPointsArray } from '$lib/utils/utils';
 	const { getMap } = getContext(contextKey);
 	export let name: string;
 	export let color = 'yellow';
@@ -25,8 +24,7 @@
 		}
 	};
 
-	$: coordinates = convertToPointsArray(points);
-	$: updateLine(coordinates);
+	$: updateLine(points);
 
 	onMount(() => {
 		const preexisting = map.getSource(sourceId);
@@ -35,7 +33,7 @@
 				type: 'Feature',
 				geometry: {
 					type: 'LineString',
-					coordinates
+					points
 				}
 			});
 			map.setLayoutProperty(lineLayerId, 'visibility', 'visible');
@@ -47,7 +45,7 @@
 						type: 'Feature',
 						geometry: {
 							type: 'LineString',
-							coordinates
+							points
 						},
 						properties: {}
 					}

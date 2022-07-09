@@ -67,7 +67,7 @@
 </script>
 
 <section>
-	<VisualizationTable {visualizations} />
+	<VisualizationTable {locations} {visualizations} />
 	<h3>Create derived visualizations from locations.</h3>
 	<Form {formDescription} {error} {handleSubmit}>
 		<FormInput
