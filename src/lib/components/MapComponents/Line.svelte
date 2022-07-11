@@ -13,13 +13,13 @@
 	const sourceId = `${name}-line-source`;
 	const lineLayerId = `${name}-line-layer`;
 
-	const updateLine = (coordinates: number[][]) => {
+	const updateLine = (points: number[][]) => {
 		if (initialized) {
 			map.getSource(sourceId).setData({
 				type: 'Feature',
 				geometry: {
 					type: 'LineString',
-					coordinates
+					coordinates: points
 				}
 			});
 		}
@@ -34,7 +34,7 @@
 				type: 'Feature',
 				geometry: {
 					type: 'LineString',
-					points
+					coordinates: points
 				}
 			});
 			map.setLayoutProperty(lineLayerId, 'visibility', 'visible');
@@ -46,7 +46,7 @@
 						type: 'Feature',
 						geometry: {
 							type: 'LineString',
-							points
+							coordinates: points
 						},
 						properties: {}
 					}
@@ -57,10 +57,11 @@
 					source: sourceId,
 					paint: {
 						'line-color': color,
-						'line-width': 2
+						'line-width': 3
 					}
 				});
 		}
+		initialized = true;
 		return () => {
 			map.setLayoutProperty(lineLayerId, 'visibility', 'none');
 		};
