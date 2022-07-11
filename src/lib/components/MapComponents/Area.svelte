@@ -5,7 +5,7 @@
 	import type { LongLat } from '$lib/types/derived-types';
 	export let name: string;
 	export let points: LongLat[];
-	export let color = 'white';
+	export let color = '#e07091';
 
 	const { getMap } = getContext(contextKey);
 	const map = getMap();
@@ -72,8 +72,8 @@
 					source: sourceId,
 					layout: {},
 					paint: {
-						'line-color': '#000',
-						'line-width': 1
+						'line-color': '#9c7dd3',
+						'line-width': 2
 					}
 				});
 		}
