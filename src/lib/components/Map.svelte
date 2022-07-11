@@ -32,7 +32,7 @@
 		bind:this={map}
 		options={{ scrollZoom: true, version: 'v2.9.0' }}
 	>
-		{#each $displayedPlaces as { tags, latitude, longitude, name, id } (id)}
+		{#each $displayedPlaces as { tags, latitude, longitude, name, id, annotation, source, page } (id)}
 			<Marker
 				color={tags?.includes('aomame') ? '#a4d236' : '#151515'}
 				lat={latitude}
@@ -40,7 +40,9 @@
 				label={`<h1>${name}</h1>`}
 			>
 				<div class="content" slot="popup">
-					<h3>{name}</h3>
+					<header><h3>{name}</h3></header>
+					<p>{annotation}</p>
+					<footer><p>{source}, {page}.</p></footer>
 				</div>
 			</Marker>
 		{/each}
@@ -56,6 +58,17 @@
 </div>
 
 <style>
+	div > p {
+		margin: 0.5rem;
+		border-bottom: 1px solid #151515;
+		padding-bottom: 0.5rem;
+	}
+
+	footer > p {
+		margin: 0.5rem;
+		text-align: right;
+	}
+
 	@media (min-width: 768px) {
 	}
 </style>

@@ -195,6 +195,39 @@ form {
 	box-shadow: none !important;
 }
 
+.mapboxgl-popup-content button {
+	color: #151515;
+	font-size: 1.8rem;
+	box-shadow: none;
+	padding: 0.2rem;
+	background-image: none;
+}
+
+.mapboxgl-popup-content {
+	background: rgba(255, 255, 255, 0.6) !important;
+	backdrop-filter: blur(5px);
+}
+
+.mapboxgl-popup-tip {
+	border-color: transparent !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+	border-top-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+	border-bottom-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+	border-right-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+	border-left-color: rgba(255, 255, 255, 0.6) !important;
+}
+
 .error-message {
 	color: var(--primary-color);
 	visibility: hidden;
